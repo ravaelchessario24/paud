@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <title>PAUD KB Flamboyan - Kelas Kami</title>
+    <style>
+      :root {
+        --primary: #8a2be2;
+        --primary-dark: #5d1c9e;
+        --primary-light: #9f50ed;
+        --white: #ffffff;
+        --light: #f5f5f7;
+        --dark: #1d1d1f;
+        --gray: #86868b;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont,
+          "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+          "Helvetica Neue", sans-serif;
+      }
+
+      body {
+        background-color: var(--white);
+        color: var(--dark);
+        line-height: 1.5;
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Header */
+      header {
+        background-color: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(10px);
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 0;
+      }
+
+      .logo {
+        height: 40px;
+        display: flex;
+        align-items: center;
+      }
+
+      .logo span {
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--primary);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .nav-links {
+        display: flex;
+        list-style: none;
+      }
+
+      .nav-links li {
+        margin-left: 30px;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: var(--dark);
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+
+      .nav-links a:hover {
+        color: var(--primary);
+      }
+
+      .daftar-btn {
+        background-color: var(--primary);
+        color: var(--white);
+        padding: 8px 20px;
+        border-radius: 20px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: background-color 0.3s;
+      }
+
+      .daftar-btn:hover {
+        background-color: var(--primary-dark);
+      }
+
+      .hamburger-menu {
+        display: none;
+        cursor: pointer;
+        z-index: 1001;
+        position: absolute;
+        top: 50%;
+        right: 20px;
+        transform: translateY(-50%);
+      }
+
+      .bar {
+        width: 25px;
+        height: 3px;
+        background-color: var(--primary);
+        margin: 5px 0;
+        transition: 0.4s;
+      }
+
+      .mobile-login {
+        display: none;
+      }
+
+      /* Media query untuk mobile */
+      @media (max-width: 768px) {
+        header .container {
+          position: relative;
+        }
+
+        nav {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 15px 0;
+          position: relative;
+        }
+
+        .hamburger-menu {
+          display: block !important;
+          visibility: visible;
+        }
+
+        .desktop-login {
+          display: none;
+        }
+
+        .mobile-login {
+          display: block;
+          margin-top: 20px;
+        }
+
+        .nav-links {
+          position: fixed;
+          top: 0;
+          right: -100%;
+          width: 70%;
+          height: 100vh;
+          background-color: var(--white);
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          transition: right 0.5s ease;
+          box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+          z-index: 1000;
+          padding: 50px 0;
+          display: flex;
+        }
+
+        .nav-links.active {
+          right: 0;
+          display: flex !important;
+        }
+
+        .nav-links li {
+          margin: 15px 0;
+          width: 100%;
+          text-align: center;
+        }
+
+        .nav-links li a {
+          display: block;
+          padding: 10px 20px;
+          text-decoration: none;
+          color: var(--dark);
+          font-weight: 500;
+          transition: color 0.3s, background-color 0.3s;
+        }
+
+        .nav-links li a:hover {
+          color: var(--primary);
+          background-color: var(--light);
+        }
+
+        .mobile-login a {
+          display: inline-block;
+          padding: 15px 20px;
+          transition: transform 0.3s, color 0.3s;
+          color: var(--dark);
+          font-weight: 600;
+        }
+
+        .mobile-login a:hover {
+          color: var(--primary);
+        }
+
+        .hamburger-menu.active .bar:nth-child(1) {
+          transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .hamburger-menu.active .bar:nth-child(2) {
+          opacity: 0;
+        }
+
+        .hamburger-menu.active .bar:nth-child(3) {
+          transform: rotate(45deg) translate(-5px, -6px);
+        }
+      }
+
+      /* Sections */
+      section {
+        padding: 100px 0;
+      }
+
+      .section-title {
+        text-align: center;
+        margin-bottom: 60px;
+      }
+
+      .section-title h2 {
+        font-size: 42px;
+        font-weight: 700;
+        margin-bottom: 15px;
+        color: var(--primary);
+      }
+
+      .section-title p {
+        font-size: 20px;
+        max-width: 800px;
+        margin: 0 auto;
+        color: var(--gray);
+      }
+
+      /* Classes Section */
+      .classes {
+        background-color: var(--light);
+      }
+
+      .classes-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 30px;
+        margin-bottom: 60px;
+      }
+
+      .class-card {
+        background-color: var(--white);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s;
+      }
+
+      .class-card:hover {
+        transform: translateY(-10px);
+      }
+
+      .class-img {
+        height: 250px;
+        overflow: hidden;
+      }
+
+      .class-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s;
+      }
+
+      .class-card:hover .class-img img {
+        transform: scale(1.05);
+      }
+
+      .class-content {
+        padding: 30px;
+      }
+
+      .class-content h3 {
+        font-size: 24px;
+        margin-bottom: 15px;
+        color: var(--primary);
+      }
+
+      .class-content p {
+        margin-bottom: 10px;
+      }
+
+      /* Pricing Section */
+      .pricing-table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: var(--white);
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        margin-bottom: 60px;
+      }
+
+      .pricing-table th,
+      .pricing-table td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #eee;
+      }
+
+      .pricing-table th {
+        background-color: var(--primary);
+        color: var(--white);
+        font-weight: 600;
+      }
+
+      .pricing-table tr:hover {
+        background-color: #f9f9f9;
+      }
+
+      .pricing-table td i {
+        margin-right: 8px;
+        color: var(--primary);
+      }
+
+      .pricing-note {
+        margin-top: 20px;
+        font-size: 16px;
+        color: var(--gray);
+        text-align: center;
+        font-style: italic;
+      }
+
+      .pricing-note span {
+        color: var(--primary);
+        font-weight: 600;
+      }
+
+      /* Schedule Section */
+      .schedule-table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: var(--white);
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      }
+
+      .schedule-table th,
+      .schedule-table td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #eee;
+      }
+
+      .schedule-table th {
+        background-color: var(--primary);
+        color: var(--white);
+        font-weight: 600;
+      }
+
+      .schedule-table tr:hover {
+        background-color: #f9f9f9;
+      }
+
+      .schedule-table td i {
+        margin-right: 8px;
+        color: var(--primary);
+      }
+
+      .schedule-note {
+        margin-top: 20px;
+        font-size: 16px;
+        color: var(--gray);
+        text-align: center;
+        font-style: italic;
+      }
+
+      .schedule-note span {
+        color: var(--primary);
+        font-weight: 600;
+      }
+
+      /* Photo */
+      .classes-img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        margin-bottom: 40px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .about-btn {
+        display: inline-block;
+        background-color: var(--primary);
+        color: var(--white);
+        padding: 10px 25px;
+        border-radius: 25px;
+        font-weight: 600;
+        text-decoration: none;
+        font-size: 16px;
+        margin-top: 20px;
+        transition: background-color 0.3s;
+      }
+
+      .about-btn:hover {
+        background-color: var(--primary-dark);
+      }
+
+      /* Footer */
+      footer {
+        background-color: var(--dark);
+        color: var(--white);
+        padding: 40px 0;
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 40px;
+        margin-bottom: 30px;
+      }
+
+      .footer-logo {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start; /* Align items to the left for desktop */
+      }
+
+      .footer-logo span {
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--primary);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 15px;
+        display: block;
+      }
+
+      .footer-logo p {
+        font-size: 16px;
+        line-height: 1.6;
+        max-width: 300px;
+      }
+
+      .footer-links h4 {
+        font-size: 18px;
+        margin-bottom: 15px;
+        color: var(--primary-light);
+      }
+
+      .footer-links ul {
+        list-style: none;
+      }
+
+      .footer-links li {
+        margin-bottom: 10px;
+      }
+
+      .footer-links a {
+        color: var(--white);
+        text-decoration: none;
+        font-size: 14px;
+        transition: color 0.3s;
+      }
+
+      .footer-links a:hover {
+        color: var(--primary-light);
+      }
+
+      .copyright {
+        text-align: center;
+        font-size: 14px;
+        padding-top: 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        opacity: 0.8;
+      }
+
+      /* Responsive */
+      @media (max-width: 1024px) {
+        .footer-content {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .classes-grid {
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+      }
+
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+
+        .section-title h2 {
+          font-size: 32px;
+        }
+
+        .footer-content {
+          grid-template-columns: 1fr;
+          text-align: center;
+        }
+
+        .footer-logo {
+          align-items: center; /* Center align for mobile */
+        }
+
+        .footer-logo p {
+          margin: 0 auto;
+        }
+
+        .footer-links {
+          margin-top: 20px;
+        }
+
+        .classes-img {
+          max-width: 100%;
+        }
+
+        .pricing-table th,
+        .pricing-table td,
+        .schedule-table th,
+        .schedule-table td {
+          font-size: 14px;
+          padding: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="container">
+        <nav>
+          <div class="logo">
+            <span>PAUD KB Flamboyan</span>
+          </div>
+          <div class="hamburger-menu">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+          </div>
+          <ul class="nav-links">
+            <li><a href="index.html#home">Beranda</a></li>
+            <li><a href="about_flamboyan.html">Tentang Kami</a></li>
+            <li><a href="index.html#classes">Kelas</a></li>
+            <li><a href="index.html#activities">Kegiatan</a></li>
+            <li><a href="index.html#teachers">Guru</a></li>
+            <li><a href="index.html#schedule">Jadwal</a></li>
+            <li><a href="index.html#testimonials">Testimoni</a></li>
+            <li><a href="index.html#location">Lokasi</a></li>
+            <li class="mobile-login">
+              <a href="pendaftaran_flamboyan.html">Daftar Sekarang</a>
+            </li>
+          </ul>
+          <a href="pendaftaran_flamboyan.html" class="daftar-btn desktop-login">Daftar Sekarang</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Classes Section -->
+    <section id="classes" class="classes">
+      <div class="container">
+        <div class="section-title">
+          <h2>Kelas Kami</h2>
+          <p>
+            Kami menyediakan berbagai kelas sesuai dengan usia dan perkembangan
+            anak, dirancang untuk mendukung pertumbuhan holistik mereka.
+          </p>
+        </div>
+        <img
+          src="img/kelas.png"
+          alt="Anak-anak belajar di PAUD KB Flamboyan"
+          class="classes-img"
+        />
+        <div class="classes-grid">
+          <div class="class-card">
+            <div class="class-img">
+              <img src="img/play group.jpg" alt="Play Group" />
+            </div>
+            <div class="class-content">
+              <h3>Play Group</h3>
+              <p><strong>Usia:</strong> 3-4 tahun</p>
+              <p><strong>Jadwal:</strong> Senin, Rabu, Jumat</p>
+              <p>
+                Kelas play group dirancang untuk memperkenalkan anak-anak pada
+                lingkungan belajar yang menyenangkan dan interaktif, dengan fokus
+                pada pengembangan motorik, sosial, dan kreativitas melalui
+                kegiatan bermain.
+              </p>
+            </div>
+          </div>
+
+          <div class="class-card">
+            <div class="class-img">
+              <img
+                src="img/WhatsApp Image 2025-05-10 at 20.23.59_8be2ef56.jpg"
+                alt="Kelas A"
+              />
+            </div>
+            <div class="class-content">
+              <h3>Kelas A</h3>
+              <p><strong>Usia:</strong> 4-5 tahun</p>
+              <p><strong>Jadwal:</strong> Senin sampai Jumat</p>
+              <p>
+                Kelas A berfokus pada pengembangan keterampilan dasar seperti
+                membaca, menulis, dan berhitung, serta pengenalan konsep akademik
+                dasar dengan cara yang menyenangkan dan interaktif.
+              </p>
+            </div>
+          </div>
+
+          <div class="class-card">
+            <div class="class-img">
+              <img src="img/kelas b.jpg" alt="Kelas B" />
+            </div>
+            <div class="class-content">
+              <h3>Kelas B</h3>
+              <p><strong>Usia:</strong> 5-6 tahun</p>
+              <p><strong>Jadwal:</strong> Senin sampai Jumat</p>
+              <p>
+                Kelas B mempersiapkan anak-anak untuk transisi ke sekolah dasar
+                dengan memperkuat keterampilan akademik, sosial, dan mandiri,
+                serta menanamkan nilai-nilai keimanan.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pricing Section -->
+        <div class="section-title">
+          <h2>Biaya Pendidikan</h2>
+          <p>
+            Informasi biaya untuk setiap kelas di PAUD KB Flamboyan, dirancang
+            untuk mendukung perkembangan anak secara optimal.
+          </p>
+        </div>
+        <table class="pricing-table">
+          <thead>
+            <tr>
+              <th>Kelas</th>
+              <th>Usia</th>
+              <th>Biaya Pendaftaran</th>
+              <th>Biaya Bulanan</th>
+              <th>Fasilitas</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><i class="fas fa-star"></i> Play Group</td>
+              <td>3-4 tahun</td>
+              <td>Rp 500.000</td>
+              <td>Rp 300.000</td>
+              <td>Pembelajaran interaktif, mainan edukasi, kegiatan seni</td>
+            </tr>
+            <tr>
+              <td><i class="fas fa-book"></i> Kelas A</td>
+              <td>4-5 tahun</td>
+              <td>Rp 600.000</td>
+              <td>Rp 350.000</td>
+              <td>Pembelajaran tematik, buku cerita, alat tulis</td>
+            </tr>
+            <tr>
+              <td><i class="fas fa-graduation-cap"></i> Kelas B</td>
+              <td>5-6 tahun</td>
+              <td>Rp 700.000</td>
+              <td>Rp 400.000</td>
+              <td>Persiapan SD, modul belajar, kegiatan ekstrakurikuler</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="pricing-note">
+          <p>
+            <span>Ayo Bergabung!</span> Biaya kami terjangkau dengan fasilitas
+            lengkap untuk mendukung perkembangan anak Anda!
+          </p>
+        </div>
+
+        <!-- Schedule Section -->
+        <div class="section-title">
+          <h2>Jadwal Kelas</h2>
+          <p>
+            Jadwal pembelajaran yang disesuaikan dengan kebutuhan perkembangan
+            anak.
+          </p>
+        </div>
+        <table class="schedule-table">
+          <thead>
+            <tr>
+              <th>Kelas</th>
+              <th>Hari</th>
+              <th>Jam</th>
+              <th>Aktivitas</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><i class="fas fa-star"></i> Play Group</td>
+              <td>Senin, Rabu, Jumat</td>
+              <td>08:00 - 10:00</td>
+              <td>Pembelajaran dan Bermain</td>
+            </tr>
+            <tr>
+              <td><i class="fas fa-book"></i> Kelas A</td>
+              <td>Senin - Jumat</td>
+              <td>08:00 - 10:00</td>
+              <td>Pembelajaran Tematik</td>
+            </tr>
+            <tr>
+              <td><i class="fas fa-graduation-cap"></i> Kelas B</td>
+              <td>Senin - Jumat</td>
+              <td>08:00 - 10:00</td>
+              <td>Pembelajaran Tematik dan Persiapan SD</td>
+            </tr>
+            <tr>
+              <td><i class="fas fa-pray"></i> Semua Kelas</td>
+              <td>Jumat</td>
+              <td>08:00 - 10:00</td>
+              <td>Aktivitas Keagamaan</td>
+            </tr>
+            <tr>
+              <td><i class="fas fa-running"></i> Semua Kelas</td>
+              <td>Rabu</td>
+              <td>08:00 - 10:00</td>
+              <td>Olahraga</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="schedule-note">
+          <p>
+            <span>Ayo Belajar dengan Ceria!</span> Jadwal kami dirancang untuk
+            membuat anak-anak semangat belajar dan berkembang setiap hari!
+          </p>
+        </div>
+        <div style="text-align: center;">
+          <a href="pendaftaran_flamboyan.html" class="about-btn">Daftar Sekarang</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-logo">
+            <span>PAUD KB Flamboyan</span>
+            <p>
+              Mencetak Generasi Unggul dan Berakhlak Mulia melalui pendidikan
+              anak usia dini yang menyenangkan dan bermakna.
+            </p>
+          </div>
+          <div class="footer-links">
+            <h4>Tautan Cepat</h4>
+            <ul>
+              <li><a href="index.html#home">Beranda</a></li>
+              <li><a href="about_flamboyan.html">Tentang Kami</a></li>
+              <li><a href="classes_flamboyan.html">Kelas</a></li>
+              <li><a href="index.html#activities">Kegiatan</a></li>
+              <li><a href="index.html#teachers">Guru</a></li>
+            </ul>
+          </div>
+          <div class="footer-links">
+            <h4>Informasi</h4>
+            <ul>
+              <li><a href="index.html#schedule">Jadwal</a></li>
+              <li><a href="index.html#testimonials">Testimoni</a></li>
+              <li><a href="index.html#location">Lokasi</a></li>
+              <li><a href="pendaftaran_flamboyan.html">Pendaftaran</a></li>
+              <li><a href="contact_flamboyan.html">Kontak</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="copyright">
+          <p>© 2025 PAUD KB Flamboyan. Hak Cipta Dilindungi.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+      // Hamburger Menu
+      document.addEventListener("DOMContentLoaded", function () {
+        const hamburgerMenu = document.querySelector(".hamburger-menu");
+        const navLinks = document.querySelector(".nav-links");
+
+        hamburgerMenu.addEventListener("click", function (e) {
+          e.stopPropagation();
+          hamburgerMenu.classList.toggle("active");
+          navLinks.classList.toggle("active");
+        });
+
+        document.querySelectorAll(".nav-links li a").forEach((link) => {
+          link.addEventListener("click", function () {
+            hamburgerMenu.classList.remove("active");
+            navLinks.classList.remove("active");
+          });
+        });
+
+        document.addEventListener("click", function (e) {
+          if (
+            !hamburgerMenu.contains(e.target) &&
+            !navLinks.contains(e.target)
+          ) {
+            hamburgerMenu.classList.remove("active");
+            navLinks.classList.remove("active");
+          }
+        });
+      });
+
+      // Smooth Scroll
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute("href")).scrollIntoView({
+            behavior: "smooth",
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
